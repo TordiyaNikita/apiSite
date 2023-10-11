@@ -38,10 +38,8 @@ form {
 }
 
 .category {
-    height: 50px;
     border: 2px solid black;
     border-radius: 2px;
-    width: 852px;
 }
 
 .button {
@@ -51,4 +49,13 @@ form {
 
 .button-cat {
     padding: 5px;
+    
+}
+.buttons{
+    display: flex;
+    justify-content: space-around;
+    gap: 70px;
+}
+.bottom_button{
+    display: flex;
 }
