@@ -55,9 +55,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 function onChange(id) {
     console.log(id);
-    let bottomButton =document.getElementById('bottom-button')
+    let bottomButton = document.getElementById('bottom-button')
     bottomButton.innerHTML = ''
-    bottomButton.insertAdjacentHTML(`beforeend`,`
+    bottomButton.insertAdjacentHTML(`beforeend`, `
     <p>Изменить название</p>
     <input type="text" name="priceText" id="priceText">
     <p>Изменить цену</p>
@@ -69,7 +69,7 @@ function onChange(id) {
 function changeProduct(id) {
     let prices = document.getElementById('prices').value
     let priceText = document.getElementById('priceText').value
-    console.log(prices,priceText);
+    console.log(prices, priceText);
     fetch(`https://api.escuelajs.co/api/v1/products/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -80,52 +80,52 @@ function changeProduct(id) {
     }).then(response => console.log(response))
 }
 
-    function del(id) {
-        console.log(id);
-        fetch(`https://api.escuelajs.co/api/v1/products/${id}`, {
-            method: "DELETE",
-            headers: { 'Content-Type': 'application/json' },
-        })
-        
-    }
-
-
-
-
-    document.getElementById('button').addEventListener('click', (e) => { //Добюавление продукта
-        e.preventDefault;
-        let title = document.getElementById('title').value;
-        let price = document.getElementById('price').value;
-        let description = document.getElementById('description').value;
-        let file = document.getElementById('foto').value;
-        let categoryId = document.getElementById('category').value;
-        fetch('https://api.escuelajs.co/api/v1/products/', {
-            method: "POST",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                "title": `${title}`,
-                "price": `${price}`,
-                "description": `${description}`,
-                "categoryId": `${categoryId}`,
-                "images": [`${file}`]
-            })
-        })
-            .then(response => response.json())
-            .then(comment => console.log(comment))
-
+function del(id) {
+    console.log(id);
+    fetch(`https://api.escuelajs.co/api/v1/products/${id}`, {
+        method: "DELETE",
+        headers: { 'Content-Type': 'application/json' },
     })
-    document.getElementById('button1').addEventListener('click', (e) => { //Создание категории
-        e.preventDefault;
-        let catrerogy = document.getElementById('catrerogy').value;
-        let image = document.getElementById('image').value;
-        fetch('https://api.escuelajs.co/api/v1/categories/', {
-            method: "POST",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                "name": `${catrerogy}`,
-                "image": `${image}`
-            })
+
+}
+
+
+
+
+document.getElementById('button').addEventListener('click', (e) => { //Добюавление продукта
+    e.preventDefault;
+    let title = document.getElementById('title').value;
+    let price = document.getElementById('price').value;
+    let description = document.getElementById('description').value;
+    let file = document.getElementById('foto').value;
+    let categoryId = document.getElementById('category').value;
+    fetch('https://api.escuelajs.co/api/v1/products/', {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            "title": `${title}`,
+            "price": `${price}`,
+            "description": `${description}`,
+            "categoryId": `${categoryId}`,
+            "images": [`${file}`]
         })
-            .then(response => response.json())
-            .then(comment => console.log(comment))
     })
+        .then(response => response.json())
+        .then(comment => console.log(comment))
+
+})
+document.getElementById('button1').addEventListener('click', (e) => { //Создание категории
+    e.preventDefault;
+    let catrerogy = document.getElementById('catrerogy').value;
+    let image = document.getElementById('image').value;
+    fetch('https://api.escuelajs.co/api/v1/categories/', {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            "name": `${catrerogy}`,
+            "image": `${image}`
+        })
+    })
+        .then(response => response.json())
+        .then(comment => console.log(comment))
+})
