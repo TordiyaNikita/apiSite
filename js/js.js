@@ -13,8 +13,11 @@ document.addEventListener("DOMContentLoaded", async () => {
             id: element.id,
             name: element.name,
         })
+        
     })
+    
     categories.forEach(el => {
+
         button.insertAdjacentHTML('beforeend', `
         <button class="button-cat" data-id='${el.id}' data-name='${el.name}'>${el.name}</button>
     `)
@@ -31,6 +34,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 .then(commits => {
                     console.log(commits);
                     commits.forEach(element => {
+                       
                         product.insertAdjacentHTML('beforeend', `
                         <div class="block_product">
                             <p >${element.id}</p>
@@ -39,7 +43,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                             <p>${element.price} $</p>
                             <div class="buttons">
                                 <button onclick="">Добавить в корзину</button>
-                                <p onclick="del(${element.id})" class="del">X</p>
                             </div>
                         </div>
                     `);

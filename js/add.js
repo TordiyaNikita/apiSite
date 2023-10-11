@@ -4,10 +4,10 @@ fetch('https://api.escuelajs.co/api/v1/products')
 fetch('https://api.escuelajs.co/api/v1/categories')
     .then(response => response.json())
     .then(commits => { console.log(commits); });
-
-let category = document.querySelectorAll('#category')
-const pop = document.getElementById('pop')
-console.log(category);
+    
+    let category = document.querySelectorAll('#category')
+    const pop = document.getElementById('pop')
+    console.log(category);
 // fetch('https://api.escuelajs.co/api/v1/categories') //Вывод категории
 //     .then(response => response.json())
 //     .then(commits => {
@@ -18,6 +18,7 @@ console.log(category);
 //         })
 //     })
 
+let i =0;
 document.addEventListener("DOMContentLoaded", async () => {
     const response = await fetch('https://api.escuelajs.co/api/v1/categories')
 
@@ -42,20 +43,21 @@ document.addEventListener("DOMContentLoaded", async () => {
                         <p onclick="name()">${commit.title}</p>
                         <img src="${commit.images}" height="250px" width="250px" >
                         <p>${commit.price} $</p>
-                        <div id="bottom-button"class="bottom_button">
-                            <button onclick="onChange(${commit.id})">Редактировать</button>
+                        <div id="bottom-button-${i}"class="bottom_button">
+                            <button onclick="onChange(${commit.id},${i})">Редактировать</button>
                             <button onclick="del(${commit.id})">Удалить</button>
                         </div>
                     `)
                     console.log(commit);
+                    i++;
                 })
             })
     })
 })
 
-function onChange(id) {
-    console.log(id);
-    let bottomButton = document.getElementById('bottom-button')
+function onChange(id,i) {
+    console.log(id,i);
+    let bottomButton = document.getElementById(`bottom-button-${i}`)
     bottomButton.innerHTML = ''
     bottomButton.insertAdjacentHTML(`beforeend`, `
     <p>Изменить название</p>
