@@ -1,5 +1,6 @@
-const io = document.getElementById('io');
+const product = document.getElementById('product');
 const button = document.getElementById('button');
+const main = document.getElementById('main_name');
 const categories = []
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -13,26 +14,31 @@ document.addEventListener("DOMContentLoaded", async () => {
     })
     categories.forEach(el => {
         button.insertAdjacentHTML('beforeend', `
-        <button class="button-cat" data-id='${el.id}'>${el.name}</button>
+        <button class="button-cat" data-id='${el.id}' data-name='${el.name}'>${el.name}</button>
     `)
     })
 
 
     Array.from(document.querySelectorAll(".button-cat")).forEach(el => {
         el.addEventListener("click", (event) => {
-            button.innerHTML = ''
+            main.innerHTML = ''
+            product.innerHTML = ''
+            const nameCategory =event.target.dataset.name;
             const catId = event.target.dataset.id
+            main.insertAdjacentHTML('beforeend',`<p>${nameCategory}</p>`)
             fetch(`https://api.escuelajs.co/api/v1/categories/${catId}/products`)
                 .then(response => response.json())
                 .then(commits => {
                     console.log(commits);
                     commits.forEach(element => {
-                        io.insertAdjacentHTML('beforeend', `
+                        product.insertAdjacentHTML('beforeend', `
+                        <div class="block_product">
         <p >${element.id}</p>
         <p onclick="name()">${element.title}</p>
         <a href="vivod.html?${element.id}"><img src="${element.images}" height="250px" width="250px" ></a>
         <p>${element.price} $</p>
         <p onclick="del(${element.id})" class="del">X</p>
+        </div>
     `);
 
                     });
@@ -98,10 +104,10 @@ const test = () => {
 // //         .then(response => response.json())
 // //         .then(comment => console.log(comment))
 // // }
-// function del(id) {
-//     console.log(id);
-//     fetch(`https://api.escuelajs.co/api/v1/products/${id}`, {
-//         method: "DELETE",
-//         headers: { 'Content-Type': 'application/json' },
-//     })
-// }
+function del(id) {
+    console.log(id);
+    fetch(`https://api.escuelajs.co/api/v1/products/${id}`, {
+        method: "DELETE",
+        headers: { 'Content-Type': 'application/json' },
+    })
+}
